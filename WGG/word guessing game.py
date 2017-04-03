@@ -143,6 +143,8 @@ def main():
         ask=input("press (0) to exit or any key to continue: ")
         print(sep)
         print("\n\n")
+    print(sep)
+    print("*********{} your overal score is: {}*********".format(username,userScore).center(len(sep)))
     uploadScore(userId, userScore)
     exit(0)
 
