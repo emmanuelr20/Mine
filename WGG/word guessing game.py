@@ -73,11 +73,12 @@ def getAns():
         exit(0)
 
 def lettersLeft(guessChar,currLettersLeft):
-    newLettersSet=''
-    for x in currLettersLeft:
-        if x == guessChar:
-            newLettersSet+='-'
-        else: newLettersSet+=x
+#    newLettersSet=''
+#    for x in currLettersLeft:
+#        if x == guessChar:
+#            newLettersSet+='-'
+#        else: newLettersSet+=x
+    newLettersSet = currLettersLeft.replace(guessChar,'-')
     return newLettersSet
 
 def validateGuess(guessChar,currAns,answer):
@@ -88,9 +89,9 @@ def validateGuess(guessChar,currAns,answer):
     elif guessChar in answer and guessChar not in currAns:
         print("CORRECT GUESS!!!")
         for x in range(len(answer)):
-            if answer[x]==guessChar:
-                newCurrAns+=answer[x]
-            else: newCurrAns+=currAns[x]
+            if answer[x] == guessChar:
+                newCurrAns += answer[x]
+            else: newCurrAns += currAns[x]
         return newCurrAns
     else: 
         print("INCORRECT GUESS!!!")
@@ -105,32 +106,32 @@ def main():
         print('*******************WELCOME NEW PLAYER: {}!!!*******************'.format(username.upper()))
     else: 
         userScore=getUserScore(userId)
-    sep="--------------------------------------------------------------------------------"
-    ask=1
+    sep = "--------------------------------------------------------------------------------"
+    ask = 1
     while ask != '0': 
-        currLettersLeft='A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z'
-        answer=getAns()
-        answer=answer.upper()
-        ansLen=len(answer)
-        currAns='-'*ansLen
-        tmpCurrAns=currAns
-        numOfTries=ansLen+1
+        currLettersLeft = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z'
+        answer = getAns()
+        answer = answer.upper()
+        ansLen = len(answer)
+        currAns = '-' * ansLen
+        tmpCurrAns = currAns
+        numOfTries = ansLen+1
         while numOfTries:
             print(sep)
             print("I am looking for a {} letter word: ".format(ansLen))
             print("Number of tries left: {}".format(numOfTries))
-            guessChar=input("Enter a letter:      ")
-            guessChar=guessChar.upper()
-            currLettersLeft=lettersLeft(guessChar,currLettersLeft)
-            currAns=validateGuess(guessChar,currAns,answer)
-            if currAns==tmpCurrAns:
+            guessChar = input("Enter a letter:      ")
+            guessChar = guessChar.upper()
+            currLettersLeft = lettersLeft(guessChar, currLettersLeft)
+            currAns = validateGuess(guessChar, currAns, answer)
+            if currAns == tmpCurrAns:
                 print("Letter not in word!!!\nCurrent status : {}".format(currAns))
-                numOfTries-=1
+                numOfTries -= 1
             else:
                 print("Bravo!!!; Current status: {} ".format(currAns))
-                tmpCurrAns=currAns
-                if currAns==answer:
-                    userScore+=1
+                tmpCurrAns = currAns
+                if currAns == answer:
+                    userScore += 1
                     print(sep)
                     print("*****************CONGRATULATIONS!!!*****************".center(len(sep)))
                     print("*********{} your overal score is: {}*********".format(username,userScore).center(len(sep)))
